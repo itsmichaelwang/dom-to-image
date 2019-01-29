@@ -456,7 +456,7 @@
                     resolve(image);
                 };
                 image.onerror = reject;
-                image.src = edgeImgSrcSafeEncode(uri);
+                image.src = uri;
             });
         }
 
