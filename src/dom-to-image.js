@@ -456,7 +456,7 @@
                     resolve(image);
                 };
                 image.onerror = reject;
-                image.src = encodeURI(uri);
+                image.src = uri;
             });
         }
 
