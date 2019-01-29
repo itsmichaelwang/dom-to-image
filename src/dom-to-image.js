@@ -155,14 +155,24 @@
             .then(util.delay(400))
             .then(function (image) {
                 var canvas = newCanvas(domNode);
-                canvas.getContext('2d').drawImage(image, 0, 0);
+                var ctx = canvas.getContext('2d');
+                if (options.scale) {
+                    ctx.scale(options.scale, options.scale);
+                }
+                ctx.drawImage(image, 0, 0);
                 return canvas;
             });
 
         function newCanvas(domNode) {
             var canvas = document.createElement('canvas');
-            canvas.width = options.width || util.width(domNode);
-            canvas.height = options.height || util.height(domNode);
+            if (options.scale) {
+	              canvas.width = options.width || options.scale * util.width(domNode);
+                canvas.height = options.height || options.scale * util.height(domNode);
+            }
+            else {
+                canvas.width = options.width || util.width(domNode);
+                canvas.height = options.height || util.height(domNode);
+            }
 
             if (options.bgcolor) {
                 var ctx = canvas.getContext('2d');
