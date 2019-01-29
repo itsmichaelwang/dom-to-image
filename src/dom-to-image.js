@@ -467,7 +467,7 @@
                 };
                 image.onerror = reject;
 
-                if (options.shouldEncode) {
+                if (domtoimage.impl.options.shouldEncode) {
                   image.src = encodeURI(uri);
                 } else {
                   image.src = uri;
