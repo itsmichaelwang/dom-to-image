@@ -152,7 +152,7 @@
     function draw(domNode, options) {
         return toSvg(domNode, options)
             .then(util.makeImage)
-            .then(util.delay(400))
+            .then(util.delay(options.delay || 100))
             .then(function (image) {
                 var canvas = newCanvas(domNode);
                 var ctx = canvas.getContext('2d');
@@ -466,7 +466,12 @@
                     resolve(image);
                 };
                 image.onerror = reject;
-                image.src = encodeURI(uri);
+
+                if (options.shouldEncode) {
+                  image.src = encodeURI(uri);
+                } else {
+                  image.src = uri;
+                }
             });
         }
 
