@@ -456,8 +456,17 @@
                     resolve(image);
                 };
                 image.onerror = reject;
-                image.src = encodeURI(uri);
+                image.src = edgeImgSrcSafeEncode(uri);
             });
+        }
+
+        function edgeImgSrcSafeEncode(uri) {
+          return uri
+            .replace(/&/g, '&amp;')
+            .replace(/%/g, '%25')
+            .replace(/\|/g, '%7c')
+            .replace(/\\\\/g, '%5c')
+            .replace(/\^/g, '%5e')
         }
 
         function getAndEncode(url) {
